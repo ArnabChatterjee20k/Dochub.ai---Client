@@ -5,53 +5,34 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
-import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
-import KeyboardAltOutlinedIcon from '@mui/icons-material/KeyboardAltOutlined';
-import Divider  from "@mui/material/Divider";
-import FilterDramaOutlinedIcon from '@mui/icons-material/FilterDramaOutlined';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Divider from "@mui/material/Divider";
+import NavLinks from "../data/NavLinks";
 
 export default function DrawerNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   const drawerWidth = 200;
   const drawer = (
     <div>
       <List>
-          <ListItem >
-            <ListItemButton sx={{gap:2,borderRadius:4}}>
-                <SmartToyOutlinedIcon/>
-              <ListItemText primary={"Bot"} sx={{color:"#515151",fontWeight:"bold"}}/>
-            </ListItemButton>
-          </ListItem>
-          
-          <ListItem >
-            <ListItemButton sx={{gap:2,borderRadius:4}}>
-                <KeyboardAltOutlinedIcon/>
-              <ListItemText primary={"Editor"} sx={{color:"#515151",fontWeight:"bold"}}/>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem>
-            <ListItemButton sx={{gap:2,borderRadius:4}}>
-                <FilterDramaOutlinedIcon/>
-              <ListItemText primary={"Recent"} sx={{color:"#515151",fontWeight:"bold"}}/>
-            </ListItemButton>
-          </ListItem>
-
-          <Divider/>
-
-          <ListItem>
-            <ListItemButton sx={{gap:2,borderRadius:4}}>
-                <InfoOutlinedIcon/>
-              <ListItemText primary={"About"} sx={{color:"#515151",fontWeight:"bold"}}/>
-            </ListItemButton>
-          </ListItem>
-
+        {NavLinks().map(({ name, Icon }, index) => {
+          return (
+            <>
+              {index === NavLinks().length - 1 && <Divider />}
+              <ListItem>
+                <ListItemButton
+                  selected={false} // set true when path and currentlink will be same
+                  sx={{ gap: 2, borderRadius: 4 }}
+                >
+                  {Icon}
+                  <ListItemText
+                    primary={name}
+                    sx={{ color: "#515151", fontWeight: "bold" }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
+          );
+        })}
       </List>
     </div>
   );
@@ -67,7 +48,7 @@ export default function DrawerNav() {
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        
+
         <Drawer
           variant="permanent"
           sx={{
@@ -75,9 +56,9 @@ export default function DrawerNav() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              minHeight:"100vh",
-              position:"static",
-              border:"none"
+              minHeight: "100vh",
+              position: "static",
+              border: "none",
             },
           }}
           open
