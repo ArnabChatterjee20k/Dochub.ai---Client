@@ -25,7 +25,7 @@ export default function ChatContainer() {
         const bot = data["bot"];
 
         return (
-          <Box width="100%">
+          <Box key={id} width="100%">
             <HumanChatSprite chat={user} />
             <AiChatSprite chat={bot} />
           </Box>
