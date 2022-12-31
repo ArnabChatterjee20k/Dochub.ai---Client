@@ -20,7 +20,7 @@ export default function Navbar() {
           >
           </IconButton>
           <Typography variant="h6" color="black" fontWeight="bold" noWrap component="div" >
-            DocHub
+            DocHub.ai
           </Typography>
         </Toolbar>
       </AppBar>

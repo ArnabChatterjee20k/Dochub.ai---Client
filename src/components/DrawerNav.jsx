@@ -56,7 +56,6 @@ export default function DrawerNav() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              minHeight: "100vh",
               position: "static",
               border: "none",
             },

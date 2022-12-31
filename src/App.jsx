@@ -9,6 +9,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material";
 import MobileNav from "./components/MobileNav";
+import Chat from "./Pages/Chat";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
           <DrawerNav />
           <Routes>
             {/* <Route path="/" element={<Navigate to={`/document/${uuidv4()}`}/>}/> */}
-            <Route path="/" />
+            <Route path="/" element={<Chat/>}/>
             <Route path="/document/:id" element={<TextEditor />} />
           </Routes>
         </Box>
