@@ -5,19 +5,30 @@ import TextField from "@mui/material/TextField";
 import { useChatContext } from "../context/ChatContextProvider";
 import generateUniqueId from "../utils/generateUniqueId";
 import { useState } from "react";
+import fetchPrompt from "../utils/fetchPrompt";
 
 export default function ChatBox() {
   const { chat, setChat } = useChatContext();
   const [prompt, setPrompt] = useState("");
-  function addUserChat(e) {
+  async function addUserChat(e) {
     e.preventDefault();
-    setPrompt("");
+    const id = generateUniqueId();
+    
     setChat((prev) => {
       return {
         ...prev,
-        [generateUniqueId()]: { user: prompt, bot: "" },
+        [id]: { user: prompt, bot: "" },
       };
     });
+    
+    const data = await fetchPrompt(prompt);
+    
+    setChat((prev) => {
+      return { ...prev, [id]: {...prev[id], bot: data } };
+    });
+
+    setPrompt("");
+    
   }
   return (
     <Paper
