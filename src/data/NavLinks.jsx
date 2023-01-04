@@ -5,9 +5,9 @@ import  SmartToy from '@mui/icons-material/SmartToy'
 
 export default function NavLinks() {
     return [
-        {name:"Bot",Icon:<SmartToy/>},
-        {name:"Editor",Icon:<KeyboardAlt/>},
-        {name:"Recent",Icon:<FilterDrama/>},
-        {name:"About",Icon:<Info/>},
+        {name:"Bot",Icon:<SmartToy/>,link:"/"},
+        {name:"Editor",Icon:<KeyboardAlt/>,link:"/editor"},
+        {name:"Recent",Icon:<FilterDrama/>,link:""},
+        {name:"About",Icon:<Info/>,link:""},
     ]
 }

@@ -3,6 +3,7 @@ import "quill/dist/quill.snow.css";
 import Quill from "quill";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
+import { server } from "./data/Constants";
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -21,7 +22,7 @@ export const TextEditor = () => {
   const { id: documentId } = useParams();
 
   useEffect(() => {
-    const sio = io("http://127.0.0.1:3002");
+    const sio = io(server);
     setSocket(sio);
     return () => {
       sio.disconnect();

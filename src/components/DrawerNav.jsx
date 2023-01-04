@@ -7,14 +7,16 @@ import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import NavLinks from "../data/NavLinks";
+import { useNavigate } from "react-router-dom";
 
 export default function DrawerNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const drawerWidth = 200;
+  const redirect = useNavigate()
   const drawer = (
     <div>
       <List>
-        {NavLinks().map(({ name, Icon }, index) => {
+        {NavLinks().map(({ name, Icon,link }, index) => {
           return (
             <>
               {index === NavLinks().length - 1 && <Divider />}
@@ -22,6 +24,7 @@ export default function DrawerNav() {
                 <ListItemButton
                   selected={false} // set true when path and currentlink will be same
                   sx={{ gap: 2, borderRadius: 4 }}
+                  onClick={()=>redirect(link)}
                 >
                   {Icon}
                   <ListItemText

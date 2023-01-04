@@ -18,7 +18,7 @@ function App() {
         <DrawerNav />
         <ChatContextProvider>
           <Routes>
-            {/* <Route path="/" element={<Navigate to={`/document/${uuidv4()}`}/>}/> */}
+            <Route path="/editor" element={<Navigate to={`/document/${uuidv4()}`}/>}/>
             <Route path="/" element={<Chat />} />
             <Route path="/document/:id" element={<TextEditor />} />
           </Routes>
