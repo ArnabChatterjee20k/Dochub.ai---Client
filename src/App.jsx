@@ -4,10 +4,11 @@ import DrawerNav from "./components/DrawerNav";
 import Navbar from "./components/Navbar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { TextEditor } from "./TextEditor";
+import { TextEditor } from "./components/TextEditor";
 import MobileNav from "./components/MobileNav";
 import Chat from "./Pages/Chat";
 import { ChatContextProvider } from "./context/ChatContextProvider";
+import { FileContextProvider } from "./context/FileContextProvider";
 
 function App() {
   return (
@@ -17,11 +18,16 @@ function App() {
         <CssBaseline />
         <DrawerNav />
         <ChatContextProvider>
-          <Routes>
-            <Route path="/editor" element={<Navigate to={`/document/${uuidv4()}`}/>}/>
-            <Route path="/" element={<Chat />} />
-            <Route path="/document/:id" element={<TextEditor />} />
-          </Routes>
+          <FileContextProvider>
+            <Routes>
+              <Route
+                path="/editor"
+                element={<Navigate to={`/document/${uuidv4()}`} />}
+              />
+              <Route path="/" element={<Chat />} />
+              <Route path="/document/:id" element={<TextEditor />} />
+            </Routes>
+          </FileContextProvider>
         </ChatContextProvider>
       </Box>
       <MobileNav />

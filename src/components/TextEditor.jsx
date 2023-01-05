@@ -3,7 +3,9 @@ import "quill/dist/quill.snow.css";
 import Quill from "quill";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
-import { server } from "./data/Constants";
+import { server } from "../data/Constants";
+import FileOperationToolbar from "./FileOperationToolbar";
+
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -31,7 +33,7 @@ export const TextEditor = () => {
 
   useEffect(() => {
     if (!socket || !quil) return;
-    
+
     socket.once("load-document", (document) => {
       quil.setContents(document);
       quil.enable(); //enabling the document after it has been sent from the server. Till then the editor will remain disabled
@@ -62,26 +64,25 @@ export const TextEditor = () => {
       quil.updateContents(delta);
     };
 
-    socket.on("receive-changes",handler)
+    socket.on("receive-changes", handler);
 
     return () => {
       socket.off("receive-changes", handler);
     };
   }, [socket, quil]);
 
-  
   // saving the document
   useEffect(() => {
-    if(!socket || !quil) return
-    const interval = setInterval(()=>{
-        socket.emit("save-document",quil.getContents())
-    },200)
- 
-    return()=>{
-        clearInterval(interval)
-    }
-  }, [socket,quil])
-  
+    if (!socket || !quil) return;
+    const interval = setInterval(() => {
+      socket.emit("save-document", quil.getContents());
+    }, 200);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [socket, quil]);
+
   // here wrapperRef is basically a function which is getting called after the element is rendered and then it calls the function
   // ref passes the elementReference automatically so wrapper argument is used
   // if not passed then return nothing
@@ -96,10 +97,14 @@ export const TextEditor = () => {
         toolbar: TOOLBAR_OPTIONS,
       },
     });
-    q.disable()
-    q.setText("Loading.....")
+    q.disable();
+    q.setText("Loading.....");
     setQuill(q);
   }, []);
 
-  return <div id="container" ref={wrapperRef}></div>;
+  return (
+    <div id="container" ref={wrapperRef}>
+        <FileOperationToolbar />
+    </div>
+  );
 };

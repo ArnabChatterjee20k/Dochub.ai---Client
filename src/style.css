@@ -9,9 +9,10 @@ body {
 
 #container .ql-editor {
   width: 100%;
-  height: 80vh;
+  height: 65vh;
   overflow-y: scroll;
-  margin: 1rem;
+  margin-inline: 1rem;
+  margin-top: 1em;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -23,12 +24,14 @@ body {
 }
 
 #container .ql-toolbar.ql-snow {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-inline: 1rem;
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #f3f3f3;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 /* for printing page selector */
@@ -54,5 +57,11 @@ body {
   }
   #container .ql-editor::-webkit-scrollbar-track {
     width: 5px;
+  }
+}
+
+@media screen and (max-width:600px) {
+  #container .ql-editor{
+    height: 45vh;
   }
 }
