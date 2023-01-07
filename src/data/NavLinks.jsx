@@ -7,7 +7,7 @@ export default function NavLinks() {
     return [
         {name:"Bot",Icon:<SmartToy/>,link:"/"},
         {name:"Editor",Icon:<KeyboardAlt/>,link:"/editor"},
-        {name:"Recent",Icon:<FilterDrama/>,link:""},
-        {name:"About",Icon:<Info/>,link:""},
+        {name:"Recent",Icon:<FilterDrama/>,link:"/recent"},
+        {name:"Blogs",Icon:<Info/>,link:"/blog"},
     ]
 }

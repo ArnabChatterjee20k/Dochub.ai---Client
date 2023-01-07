@@ -3,10 +3,11 @@ import Paper from "@mui/material/Paper";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import NavLinks from "../data/NavLinks";
+import { useNavigate } from "react-router-dom";
 
 export default function MobileNav() {
   const [value, setValue] = React.useState(0);
-
+  const redirect = useNavigate()
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0, display:{"sm":"none"} }}
@@ -29,8 +30,8 @@ export default function MobileNav() {
           },
         }}
       >
-        {NavLinks().map(({ name, Icon },index) => {
-          return <BottomNavigationAction value={index} label={name} icon={Icon}/>;
+        {NavLinks().map(({ name, Icon , link },index) => {
+          return <BottomNavigationAction value={index} label={name} icon={Icon} onClick={()=>redirect(link)}/>;
         })}
       </BottomNavigation>
     </Paper>
