@@ -10,7 +10,7 @@ export default function MobileNav() {
   const redirect = useNavigate()
   return (
     <Paper
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0, display:{"sm":"none"} }}
+      sx={{position: "fixed", bottom: 0, left: 0, right: 0, display:{"xs":"flex","sm":"none"} , overflowX:"scroll"}}
       elevation={3}
     >
       <BottomNavigation
