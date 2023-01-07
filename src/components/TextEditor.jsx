@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import "quill/dist/quill.snow.css";
 import Quill from "quill";
-import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 import { server } from "../data/Constants";
 import FileOperationToolbar from "./FileOperationToolbar";
+import { useSocketContext } from "../context/SocketContextProvider";
+import { useFileContext } from "../context/FileContextProvider";
 
 
 const TOOLBAR_OPTIONS = [
@@ -18,24 +19,19 @@ const TOOLBAR_OPTIONS = [
   ["clean"],
 ];
 export const TextEditor = () => {
-  const [socket, setSocket] = useState();
   const [quil, setQuill] = useState();
 
   const { id: documentId } = useParams();
 
-  useEffect(() => {
-    const sio = io(server);
-    setSocket(sio);
-    return () => {
-      sio.disconnect();
-    };
-  }, []);
+  const { socket } = useSocketContext();
 
+  const {filename,setFilename} = useFileContext()
   useEffect(() => {
     if (!socket || !quil) return;
 
-    socket.once("load-document", (document) => {
+    socket.once("load-document", (document,filename) => {
       quil.setContents(document);
+      setFilename(filename)
       quil.enable(); //enabling the document after it has been sent from the server. Till then the editor will remain disabled
     });
 
@@ -60,7 +56,6 @@ export const TextEditor = () => {
   useEffect(() => {
     if (!quil || !socket) return;
     const handler = (delta) => {
-      console.log(quil.updateContents);
       quil.updateContents(delta);
     };
 
@@ -75,13 +70,14 @@ export const TextEditor = () => {
   useEffect(() => {
     if (!socket || !quil) return;
     const interval = setInterval(() => {
-      socket.emit("save-document", quil.getContents());
+      const fileRecord = {data:quil.getContents(),filename:filename};
+      socket.emit("save-document",fileRecord)
     }, 200);
 
     return () => {
       clearInterval(interval);
     };
-  }, [socket, quil]);
+  }, [socket, quil,filename]);
 
   // here wrapperRef is basically a function which is getting called after the element is rendered and then it calls the function
   // ref passes the elementReference automatically so wrapper argument is used
@@ -104,7 +100,7 @@ export const TextEditor = () => {
 
   return (
     <div id="container" ref={wrapperRef}>
-        <FileOperationToolbar />
+      <FileOperationToolbar />
     </div>
   );
 };

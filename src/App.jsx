@@ -8,6 +8,7 @@ import { TextEditor } from "./components/TextEditor";
 import MobileNav from "./components/MobileNav";
 import Chat from "./Pages/Chat";
 import { ChatContextProvider } from "./context/ChatContextProvider";
+import SocketContextProvider from "./context/SocketContextProvider";
 import { FileContextProvider } from "./context/FileContextProvider";
 
 function App() {
@@ -17,18 +18,20 @@ function App() {
       <Box sx={{ display: "flex", marginTop: "4rem" }}>
         <CssBaseline />
         <DrawerNav />
-        <ChatContextProvider>
+        <SocketContextProvider>
           <FileContextProvider>
-            <Routes>
-              <Route
-                path="/editor"
-                element={<Navigate to={`/document/${uuidv4()}`} />}
-              />
-              <Route path="/" element={<Chat />} />
-              <Route path="/document/:id" element={<TextEditor />} />
-            </Routes>
+            <ChatContextProvider>
+              <Routes>
+                <Route
+                  path="/editor"
+                  element={<Navigate to={`/document/${uuidv4()}`} />}
+                />
+                <Route path="/" element={<Chat />} />
+                <Route path="/document/:id" element={<TextEditor />} />
+              </Routes>
+            </ChatContextProvider>
           </FileContextProvider>
-        </ChatContextProvider>
+        </SocketContextProvider>
       </Box>
       <MobileNav />
     </BrowserRouter>

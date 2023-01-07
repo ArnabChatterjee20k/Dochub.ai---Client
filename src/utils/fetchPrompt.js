@@ -1,5 +1,6 @@
+import { server } from "../data/Constants";
 export default async function fetchPrompt(prompt) {
-  const response = await fetch("http://localhost:5000/bot", {
+  const response = await fetch(server+"/bot", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
