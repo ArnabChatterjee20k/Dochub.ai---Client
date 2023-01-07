@@ -10,6 +10,7 @@ import Chat from "./Pages/Chat";
 import { ChatContextProvider } from "./context/ChatContextProvider";
 import SocketContextProvider from "./context/SocketContextProvider";
 import { FileContextProvider } from "./context/FileContextProvider";
+import ImageSearch from "./components/ImageSearch";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Box sx={{ display: "flex", marginTop: "4rem" }}>
         <CssBaseline />
         <DrawerNav />
-        <SocketContextProvider>
+        {/* <SocketContextProvider> */}
           <FileContextProvider>
             <ChatContextProvider>
               <Routes>
@@ -28,10 +29,11 @@ function App() {
                 />
                 <Route path="/" element={<Chat />} />
                 <Route path="/document/:id" element={<TextEditor />} />
+                <Route path="/images" element={<ImageSearch />} />
               </Routes>
             </ChatContextProvider>
           </FileContextProvider>
-        </SocketContextProvider>
+        {/* </SocketContextProvider> */}
       </Box>
       <MobileNav />
     </BrowserRouter>
