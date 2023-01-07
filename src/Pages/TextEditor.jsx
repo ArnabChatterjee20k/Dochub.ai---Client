@@ -3,7 +3,7 @@ import "quill/dist/quill.snow.css";
 import Quill from "quill";
 import { useParams } from "react-router-dom";
 import { server } from "../data/Constants";
-import FileOperationToolbar from "./FileOperationToolbar";
+import FileOperationToolbar from "../components/FileOperationToolbar";
 import { useSocketContext } from "../context/SocketContextProvider";
 import { useFileContext } from "../context/FileContextProvider";
 

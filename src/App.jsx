@@ -4,13 +4,13 @@ import DrawerNav from "./components/DrawerNav";
 import Navbar from "./components/Navbar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { TextEditor } from "./components/TextEditor";
+import { TextEditor } from "./pages/TextEditor";
 import MobileNav from "./components/MobileNav";
 import Chat from "./Pages/Chat";
 import { ChatContextProvider } from "./context/ChatContextProvider";
 import SocketContextProvider from "./context/SocketContextProvider";
 import { FileContextProvider } from "./context/FileContextProvider";
-import ImageSearch from "./components/ImageSearch";
+import ImageSearch from "./Pages/ImageSearch";
 
 function App() {
   return (

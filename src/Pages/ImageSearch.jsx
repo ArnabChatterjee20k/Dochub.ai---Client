@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import fetchImages from "../utils/fetchImages";
-import ImageCard from "./ImageCard";
+import ImageCard from "../components/ImageCard";
 export default function ImageSearch() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
