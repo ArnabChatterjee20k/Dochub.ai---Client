@@ -13,6 +13,7 @@ import { FileContextProvider } from "./context/FileContextProvider";
 import ImageSearch from "./Pages/ImageSearch";
 import DialogContextProvider from "./context/DialogContextProvider";
 import AddBlogForm from "./components/AddBlogForm";
+import Blogs from "./Pages/Blogs";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
                   <Route path="/" element={<Chat />} />
                   <Route path="/document/:id" element={<TextEditor />} />
                   <Route path="/images" element={<ImageSearch />} />
+                  <Route path="/blog/" element={<Blogs />} />
+                  <Route path="/blog/:id" element={<TextEditor />} />
                 </Routes>
               </ChatContextProvider>
             </FileContextProvider>
