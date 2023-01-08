@@ -19,7 +19,7 @@ function App() {
       <Box sx={{ display: "flex", marginTop: "4rem" }}>
         <CssBaseline />
         <DrawerNav />
-        {/* <SocketContextProvider> */}
+        <SocketContextProvider>
           <FileContextProvider>
             <ChatContextProvider>
               <Routes>
@@ -33,7 +33,7 @@ function App() {
               </Routes>
             </ChatContextProvider>
           </FileContextProvider>
-        {/* </SocketContextProvider> */}
+        </SocketContextProvider>
       </Box>
       <MobileNav />
     </BrowserRouter>
