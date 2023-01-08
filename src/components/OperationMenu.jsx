@@ -4,11 +4,15 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useFileContext } from "../context/FileContextProvider";
+import { useDialogContext } from "../context/DialogContextProvider";
+import { useParams } from "react-router-dom";
 
 export default function OperationMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const {filename} = useFileContext()
+  const { filename } = useFileContext();
+  const { handleClickOpen, setId } = useDialogContext();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -21,14 +25,22 @@ export default function OperationMenu() {
       navigator
         .share({
           title: filename,
-          text: "Checkout my doc "+filename,
+          text: "Checkout my doc " + filename,
           url: window.location.href,
         })
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
     }
-    handleClose()
+    handleClose();
   };
+
+  const publish = () => {
+    handleClickOpen();
+    handleClose();
+  };
+
+  const { id } = useParams();
+  setId(id);
 
   return (
     <div>
@@ -57,7 +69,7 @@ export default function OperationMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Publish</MenuItem>
+        <MenuItem onClick={publish}>Publish</MenuItem>
         <MenuItem onClick={share}>Share Link</MenuItem>
       </Menu>
     </div>

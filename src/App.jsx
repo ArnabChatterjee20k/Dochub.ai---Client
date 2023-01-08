@@ -11,6 +11,8 @@ import { ChatContextProvider } from "./context/ChatContextProvider";
 import SocketContextProvider from "./context/SocketContextProvider";
 import { FileContextProvider } from "./context/FileContextProvider";
 import ImageSearch from "./Pages/ImageSearch";
+import DialogContextProvider from "./context/DialogContextProvider";
+import AddBlogForm from "./components/AddBlogForm";
 
 function App() {
   return (
@@ -19,21 +21,24 @@ function App() {
       <Box sx={{ display: "flex", marginTop: "4rem" }}>
         <CssBaseline />
         <DrawerNav />
-        <SocketContextProvider>
-          <FileContextProvider>
-            <ChatContextProvider>
-              <Routes>
-                <Route
-                  path="/editor"
-                  element={<Navigate to={`/document/${uuidv4()}`} />}
-                />
-                <Route path="/" element={<Chat />} />
-                <Route path="/document/:id" element={<TextEditor />} />
-                <Route path="/images" element={<ImageSearch />} />
-              </Routes>
-            </ChatContextProvider>
-          </FileContextProvider>
-        </SocketContextProvider>
+        <DialogContextProvider>
+          <SocketContextProvider>
+            <FileContextProvider>
+              <ChatContextProvider>
+                <AddBlogForm/>
+                <Routes>
+                  <Route
+                    path="/editor"
+                    element={<Navigate to={`/document/${uuidv4()}`} />}
+                  />
+                  <Route path="/" element={<Chat />} />
+                  <Route path="/document/:id" element={<TextEditor />} />
+                  <Route path="/images" element={<ImageSearch />} />
+                </Routes>
+              </ChatContextProvider>
+            </FileContextProvider>
+          </SocketContextProvider>
+        </DialogContextProvider>
       </Box>
       <MobileNav />
     </BrowserRouter>
