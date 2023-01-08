@@ -6,7 +6,7 @@ import { server } from "../data/Constants";
 import FileOperationToolbar from "../components/FileOperationToolbar";
 import { useSocketContext } from "../context/SocketContextProvider";
 import { useFileContext } from "../context/FileContextProvider";
-
+import "../style.css"
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],

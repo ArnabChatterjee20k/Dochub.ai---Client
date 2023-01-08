@@ -6,7 +6,7 @@ import fetchBlogs from "../utils/fetchBlogs";
 import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Chip from '@mui/material/Chip';
-
+// import "../blog.css"
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
