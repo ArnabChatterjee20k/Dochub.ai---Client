@@ -20,8 +20,9 @@ export default function MobileNav() {
           setValue(newValue);
         }}
         sx={{
+          margin:"auto",
           "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
-            color: "#757575",
+            color: "#757575"
           },
           "& .Mui-selected": {
             "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
