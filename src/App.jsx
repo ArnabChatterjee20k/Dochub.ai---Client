@@ -15,6 +15,7 @@ import DialogContextProvider from "./context/DialogContextProvider";
 import AddBlogForm from "./components/AddBlogForm";
 import Blogs from "./Pages/Blogs";
 import SingleBlog from "./Pages/SingleBlog";
+import Recent from "./Pages/Recent";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                     element={<Navigate to={`/document/${uuidv4()}`} />}
                   />
                   <Route path="/" element={<Chat />} />
+                  <Route path="/recent" element={<Recent />} />
                   <Route path="/document/:id" element={<TextEditor />} />
                   <Route path="/images" element={<ImageSearch />} />
                   <Route path="/blog/" element={<Blogs />} />

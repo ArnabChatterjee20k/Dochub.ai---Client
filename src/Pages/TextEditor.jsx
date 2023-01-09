@@ -7,6 +7,8 @@ import FileOperationToolbar from "../components/FileOperationToolbar";
 import { useSocketContext } from "../context/SocketContextProvider";
 import { useFileContext } from "../context/FileContextProvider";
 import "../style.css"
+import { setStorage } from "../utils/storage";
+
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -26,6 +28,7 @@ export const TextEditor = () => {
   const { socket } = useSocketContext();
 
   const {filename,setFilename} = useFileContext()
+
   useEffect(() => {
     if (!socket || !quil) return;
 
@@ -33,9 +36,10 @@ export const TextEditor = () => {
       quil.setContents(document);
       setFilename(filename)
       quil.enable(); //enabling the document after it has been sent from the server. Till then the editor will remain disabled
+      setStorage()
     });
-
     socket.emit("get-document", documentId);
+
   }, [socket, quil, documentId]);
 
   useEffect(() => {

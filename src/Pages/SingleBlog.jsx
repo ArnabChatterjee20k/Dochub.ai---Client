@@ -7,6 +7,7 @@ import fetchSingleBlog from "../utils/fetchSingleBlog";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
+import { setStorage } from "../utils/storage";
 
 export default function SingleBlog() {
   const [author, setAuthor] = useState("");
@@ -14,6 +15,7 @@ export default function SingleBlog() {
   const [data, setData] = useState("");
   const [quil, setQuill] = useState();
   const { id } = useParams();
+  setStorage()
   useEffect(() => {
     if (!quil) return;
     const blog = fetchSingleBlog(id).then(({ data, filename }) => {
