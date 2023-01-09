@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import fetchBlogs from "../utils/fetchBlogs";
 import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
-import Chip from '@mui/material/Chip';
-// import "../blog.css"
+import Chip from "@mui/material/Chip";
+import BlogBg from "../assets/blog-bg.png";
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
@@ -16,13 +16,25 @@ export default function Blogs() {
   }, []);
 
   return (
-    <Stack gap={3} width="100%" paddingY="3rem" paddingX="6rem">
-      <Typography variant="h4">Blogs</Typography>
-      <Stack>
-        {blogs.map(({ title, _id, author }) => {
+    <Stack gap={3} width="100%" marginBottom="3rem" sx={{paddingTop:{xs:"1rem",sm:"3rem"}}}>
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        marginX="auto"
+        sx={{
+          width: {xs:"95%",sm:"80%"},
+          height: {xs:"12rem",sm:"17rem"},
+          background: `black url(${BlogBg}) no-repeat`,
+          borderRadius:"10px"
+        }}
+      >
+        <Typography variant="h4" fontWeight="bold" fontSize="3rem" sx={{backdropFilter:"blur(1px)"}}>Blogs</Typography>
+      </Stack>
+      <Stack paddingX="1rem" marginX="auto" sx={{width:{xs:"90%",sm:"80%"}}}>
+        {blogs?.map(({ title, _id, author }) => {
           return (
             <>
-              <Stack alignItems="flex-start" paddingY="10px" gap={1}>
+              <Stack alignItems="flex-start" paddingY="10px" paddingX="1rem" gap={1}>
                 <Link
                   to={`/blog/${_id}`}
                   style={{ color: "black", textDecoration: "none" }}
@@ -36,7 +48,7 @@ export default function Blogs() {
                   </Typography>
                 </Link>
                 <Stack flexDirection="row" gap={1} alignItems="center">
-                    <Typography>-by</Typography> <Chip label={author} />
+                  <Typography>-by</Typography> <Chip label={author} />
                 </Stack>
               </Stack>
               <Divider />
