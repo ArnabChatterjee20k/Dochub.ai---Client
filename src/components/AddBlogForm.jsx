@@ -57,7 +57,7 @@ export default function AddBlogForm() {
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button disabled={author.trim().length === 0} onClick={publishBlog}>
-          Subscribe
+          Publish
         </Button>
       </DialogActions>
     </Dialog>
