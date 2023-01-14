@@ -2,9 +2,11 @@ import TextField  from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useSocketContext } from "../context/SocketContextProvider";
 import {useFileContext} from "../context/FileContextProvider"
+import { io } from "socket.io-client";
+import { server } from "../data/Constants";
 
 export default function FileNameBar() {
-    const {socket} = useSocketContext()
+    const {socket,setSocket} = useSocketContext()
     const [border,setBorder] = useState(false)
     const {filename,setFilename} = useFileContext()
     
@@ -14,6 +16,14 @@ export default function FileNameBar() {
       setFilename(val)
       socket.off("send-filename")
     }
+
+    useEffect(() => {
+      const sio = io(server);
+      setSocket(sio);
+      return () => {
+        sio.disconnect();
+      };
+    }, []);
 
     useEffect(()=>{
       if(!socket) return;

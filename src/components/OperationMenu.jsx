@@ -21,6 +21,8 @@ export default function OperationMenu() {
   };
 
   const share = () => {
+    console.log("running");
+    console.log(navigator.share);
     if (navigator.share) {
       navigator
         .share({
@@ -40,6 +42,7 @@ export default function OperationMenu() {
   };
 
   const { id } = useParams();
+
   setId(id);
 
   return (

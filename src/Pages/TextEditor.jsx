@@ -8,7 +8,7 @@ import { useSocketContext } from "../context/SocketContextProvider";
 import { useFileContext } from "../context/FileContextProvider";
 import "../style.css"
 import { setStorage } from "../utils/storage";
-
+import { io } from "socket.io-client";
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -25,7 +25,7 @@ export const TextEditor = () => {
 
   const { id: documentId } = useParams();
 
-  const { socket } = useSocketContext();
+  const { socket , setSocket} = useSocketContext();
 
   const {filename,setFilename} = useFileContext()
 
@@ -41,6 +41,14 @@ export const TextEditor = () => {
     socket.emit("get-document", documentId);
 
   }, [socket, quil, documentId]);
+
+  useEffect(() => {
+    const sio = io(server);
+    setSocket(sio);
+    return () => {
+      sio.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (!quil || !socket) return;
